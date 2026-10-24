@@ -5,6 +5,19 @@ import Data.Monoid (mappend)
 import Hakyll
 
 --------------------------------------------------------------------------------
+siteCtx :: Context String
+siteCtx =
+    listField
+        "pages"
+        defaultContext
+        (map (\i -> Item i "") <$> getMatches "pages/*")
+        `mappend` defaultContext
+
+postCtx :: Context String
+postCtx =
+    dateField "date" "%B %e, %Y"
+        `mappend` siteCtx
+
 main :: IO ()
 main = hakyll $ do
     match "images/*" $ do
@@ -15,11 +28,11 @@ main = hakyll $ do
         route idRoute
         compile compressCssCompiler
 
-    match (fromList ["about.md", "contact.md"]) $ do
-        route $ setExtension "html"
+    match "pages/*" $ do
+        route $ gsubRoute "pages/" (const "") `composeRoutes` setExtension "html"
         compile $
             pandocCompiler
-                >>= loadAndApplyTemplate "templates/default.html" defaultContext
+                >>= loadAndApplyTemplate "templates/default.html" siteCtx
                 >>= relativizeUrls
 
     match "posts/*" $ do
@@ -37,7 +50,7 @@ main = hakyll $ do
             let archiveCtx =
                     listField "posts" postCtx (return posts)
                         `mappend` constField "title" "Archives"
-                        `mappend` defaultContext
+                        `mappend` siteCtx
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
@@ -50,7 +63,7 @@ main = hakyll $ do
             posts <- recentFirst =<< loadAll "posts/*"
             let indexCtx =
                     listField "posts" postCtx (return posts)
-                        `mappend` defaultContext
+                        `mappend` siteCtx
 
             getResourceBody
                 >>= applyAsTemplate indexCtx
@@ -59,9 +72,3 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateBodyCompiler
-
---------------------------------------------------------------------------------
-postCtx :: Context String
-postCtx =
-    dateField "date" "%B %e, %Y"
-        `mappend` defaultContext
