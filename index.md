@@ -6,12 +6,13 @@ title: Home
 
 ![](/images/haskell-logo.png){style="float: right; margin: 10px;"}
 
-Welcome to my blog!
+Welcome to CPSC 490X — Programming Language Paradigms!
 
-I've reproduced a list of recent posts here for your reading pleasure:
+Use the menu above to find key course information and links to other course
+resources.
 
-## Posts
+## Updates
 
 $partial("templates/post-list.html")$
 
-…or you can find more in the [archives](/archive.html).
+A total list of posts is available in the [archives](/archive.html).
