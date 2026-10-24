@@ -1,0 +1,4 @@
+cradle:
+  cabal:
+    - path: "site.hs"
+      component: "plp-website:exe:site"
