@@ -32,12 +32,12 @@ jobs:
         run: nix run .#build
 
       - name: Verify generated site
-        run: test -f docs/index.html
+        run: test -f _site/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./docs
+          path: ./_site
 
   deploy:
     needs: build
