@@ -6,7 +6,7 @@ title: Home
 
 ![](/images/haskell-logo.png){style="float: right; margin: 10px;"}
 
-Welcome to CPSC 490X — Programming Language Paradigms!
+Welcome to CPSC 490S — Programming Language Paradigms!
 
 Use the menu above to find key course information and links to other course
 resources.

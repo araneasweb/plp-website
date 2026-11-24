@@ -4,7 +4,7 @@ title: Syllabus
 
 # Course Description
 
-Welcome to CPSC 490X — Programming Language Paradigms
+Welcome to CPSC 490S — Programming Language Paradigms
 
 We're gonna be exploring functional programming, logic programming, and some
 dependent types :)
